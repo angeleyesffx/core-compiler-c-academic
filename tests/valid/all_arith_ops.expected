@@ -1,0 +1,7 @@
+Lexical analysis complete: 52 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['a', scope=0]
+  ['b', scope=0]
+  ['c', scope=0]
+  ['arith', scope=0]

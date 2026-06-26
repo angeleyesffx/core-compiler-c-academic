@@ -1,0 +1,7 @@
+Lexical analysis complete: 70 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['relops', scope=0]
+  ['a', scope=0]
+  ['b', scope=0]
+  ['flag', scope=0]

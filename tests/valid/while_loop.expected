@@ -1,0 +1,5 @@
+Lexical analysis complete: 28 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['n', scope=0]
+  ['looptest', scope=0]

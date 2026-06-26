@@ -1,0 +1,4 @@
+Lexical analysis complete: 6 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['minimal', scope=0]

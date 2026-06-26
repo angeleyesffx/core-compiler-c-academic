@@ -1,0 +1,15 @@
+program relops ;
+var a , b : integer ;
+var flag : boolean ;
+begin
+a := 3 ;
+b := 5 ;
+if ( a = b ) then
+flag := true ;
+if ( a <> b ) then
+flag := false ;
+if ( a >= b ) then
+a := 0 ;
+if ( a <= b ) then
+a := 1 ;
+end .

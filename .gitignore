@@ -1,0 +1,11 @@
+# Build artifacts
+compiler
+src/*.o
+tests/unit/test_lexer
+
+# Runtime output
+output.txt
+saida.txt
+
+# macOS
+.DS_Store

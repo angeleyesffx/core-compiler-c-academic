@@ -1,0 +1,11 @@
+program iftest ;
+var a , b : integer ;
+begin
+a := 5 ;
+b := 10 ;
+if ( a < b ) then
+a := b
+else
+b := a ;
+write ( a ) ;
+end .

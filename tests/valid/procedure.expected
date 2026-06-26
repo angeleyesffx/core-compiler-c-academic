@@ -1,0 +1,5 @@
+Lexical analysis complete: 47 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['proctest', scope=0]
+  ['result', scope=0]

@@ -1,0 +1,6 @@
+program bad ;
+var a : boolean ;
+begin
+if ( a or true ) then
+a := false ;
+end .

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: sudo apt-get install -y --no-install-recommends valgrind cppcheck
+
+      # ---------------------------------------------------------------- #
+      # 1. Build — zero warnings required                                 #
+      # ---------------------------------------------------------------- #
+      - name: Build
+        run: make
+
+      # ---------------------------------------------------------------- #
+      # 2. Correctness — all test cases must pass                        #
+      # ---------------------------------------------------------------- #
+      - name: Run tests
+        run: make test
+
+      # ---------------------------------------------------------------- #
+      # 3. Memory — no leaks or invalid accesses on valid programs       #
+      # ---------------------------------------------------------------- #
+      - name: Memory check (valgrind)
+        run: |
+          for f in tests/valid/*.txt; do
+            echo "--- valgrind: $f ---"
+            valgrind \
+              --error-exitcode=1 \
+              --leak-check=full \
+              --show-leak-kinds=all \
+              ./compiler "$f" 2>&1
+          done
+
+      # ---------------------------------------------------------------- #
+      # 4. Static analysis — cppcheck on all source files                #
+      # ---------------------------------------------------------------- #
+      - name: Static analysis (cppcheck)
+        run: |
+          cppcheck \
+            --enable=warning,style,performance \
+            --error-exitcode=1 \
+            --suppress=missingIncludeSystem \
+            src/

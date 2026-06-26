@@ -1,0 +1,5 @@
+Lexical analysis complete: 15 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['x', scope=0]
+  ['basic', scope=0]

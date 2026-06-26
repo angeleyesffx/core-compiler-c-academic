@@ -1,0 +1,4 @@
+program bad ;
+var begin : integer ;
+begin
+end .

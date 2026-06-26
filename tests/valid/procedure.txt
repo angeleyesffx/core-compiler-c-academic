@@ -1,0 +1,12 @@
+program proctest ;
+var result : integer ;
+procedure calc ( var x : integer ) ;
+var temp : integer ;
+begin
+temp := x ;
+x := temp + 1 ;
+end ;
+begin
+result := 0 ;
+write ( result ) ;
+end .

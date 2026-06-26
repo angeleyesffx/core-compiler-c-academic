@@ -1,0 +1,10 @@
+Lexical analysis complete: 155 tokens found.
+Syntactic analysis complete — no errors.
+SYMBOL TABLE:
+  ['a', scope=0]
+  ['b', scope=0]
+  ['c', scope=0]
+  ['d', scope=0]
+  ['e', scope=0]
+  ['f', scope=0]
+  ['correto', scope=0]

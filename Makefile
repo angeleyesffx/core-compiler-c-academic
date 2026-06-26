@@ -1,27 +1,33 @@
-# Final compiler executable name
-TARGET = compiler
+TARGET  = compiler
+CC      = gcc
+CFLAGS  = -Wall -Wextra -std=c99 -Isrc
+SRCDIR  = src
 
-# Compiler and compilation flags
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+SRCS = $(SRCDIR)/main.c \
+       $(SRCDIR)/lexer.c \
+       $(SRCDIR)/buffer.c \
+       $(SRCDIR)/symtable.c \
+       $(SRCDIR)/parser.c
 
-# Automatically locate all .c source files in the directory
-SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 
-# Default rule (compiles the entire project)
 all: $(TARGET)
 
-# Link object files to create the final compiler binary
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-# Compile source files into object files
-%.o: %.c
+$(SRCDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean up generated binary and object files
-clean:
-	rm -f *.o $(TARGET)
+UNIT_BIN = tests/unit/test_lexer
 
-.PHONY: all clean
+$(UNIT_BIN): tests/unit/test_lexer.c $(SRCDIR)/lexer.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+test: $(TARGET) $(UNIT_BIN)
+	@bash tests/run_tests.sh
+
+clean:
+	rm -f $(SRCDIR)/*.o $(TARGET) $(UNIT_BIN) output.txt
+
+.PHONY: all test clean
