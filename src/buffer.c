@@ -46,7 +46,7 @@ Token *buffer_dequeue(Token *head) {
     return t;
 }
 
-Token *buffer_head(Token *head) {
+const Token *buffer_head(const Token *head) {
     if (buffer_empty(head)) {
         fprintf(stderr, "Syntax error: unexpected end of input\n");
         exit(1);
@@ -54,13 +54,13 @@ Token *buffer_head(Token *head) {
     return head->next;
 }
 
-int buffer_lookahead(Token *head) {
+int buffer_lookahead(const Token *head) {
     return buffer_head(head)->code;
 }
 
 void buffer_match(Token *head, int expected_code) {
     if (buffer_lookahead(head) != expected_code) {
-        Token *t = buffer_head(head);
+        const Token *t = buffer_head(head);
         fprintf(stderr, "Syntax error at line %d: expected token %d, found '%s' (%d)\n",
                 t->line, expected_code, t->lexeme, t->code);
         exit(1);

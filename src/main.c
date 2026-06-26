@@ -13,13 +13,13 @@ int main(int argc, char *argv[]) {
     const char *input_path  = (argc > 1) ? argv[1] : "program.txt";
     const char *output_path = "output.txt";
 
-    FILE *source   = fopen(input_path,  "r");
-    FILE *output = fopen(output_path, "w");
-
+    FILE *source = fopen(input_path, "r");
     if (!source) {
         fprintf(stderr, "Error: cannot open input file '%s'\n", input_path);
         return 1;
     }
+
+    FILE *output = fopen(output_path, "w");
     if (!output) {
         fprintf(stderr, "Error: cannot open output file '%s'\n", output_path);
         fclose(source);
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
         line_num++;
 
         /* Tokenize the line by whitespace (handles spaces, tabs, newlines) */
-        char *tok = strtok(line, " \t\n\r");
+        const char *tok = strtok(line, " \t\n\r");
         while (tok && lexer_ok) {
             /* Append trailing space so the DFA acceptance states trigger */
             char tok_buf[MAX_LINE + 1];
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
                 token_count++;
             }
 
-            tok = strtok(NULL, " \t\n\r");
+            tok = (const char *)strtok(NULL, " \t\n\r");
         }
     }
 

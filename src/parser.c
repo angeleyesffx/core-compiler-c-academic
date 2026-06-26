@@ -40,7 +40,7 @@ static void parse_program    (Token *buf, SymTable *sym, int scope);
 /* Helper: report a syntax error with line number and exit             */
 /* ------------------------------------------------------------------ */
 static void syntax_error(Token *buf, const char *expected) {
-    Token *t = buffer_head(buf);
+    const Token *t = buffer_head(buf);
     fprintf(stderr, "Syntax error at line %d: expected %s, found '%s'\n",
             t->line, expected, t->lexeme);
     exit(1);
@@ -381,7 +381,7 @@ static void parse_statement(Token *buf, SymTable *sym, int scope) {
                After <id>, if the next token is <(> it is a procedure call;
                otherwise it is an assignment.  The linked list lets us inspect
                buf->next->next without consuming any token. */
-            Token *second = buffer_head(buf)->next;
+            const Token *second = buffer_head(buf)->next;
             if (second && second->code == _LPAREN)
                 parse_proc_call(buf, sym, scope);
             else
@@ -423,7 +423,6 @@ static void parse_compound(Token *buf, SymTable *sym, int scope) {
 
     /* Remove all symbols declared in this scope (CLRS §11.2 DELETE) */
     symtable_remove_scope(sym, scope);
-    scope--;
     buffer_match(buf, _END);
 }
 
