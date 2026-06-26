@@ -39,7 +39,7 @@ static void parse_program    (Token *buf, SymTable *sym, int scope);
 /* ------------------------------------------------------------------ */
 /* Helper: report a syntax error with line number and exit             */
 /* ------------------------------------------------------------------ */
-static void syntax_error(Token *buf, const char *expected) {
+static void syntax_error(const Token *buf, const char *expected) {
     const Token *t = buffer_head(buf);
     fprintf(stderr, "Syntax error at line %d: expected %s, found '%s'\n",
             t->line, expected, t->lexeme);
